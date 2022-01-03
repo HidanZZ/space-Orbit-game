@@ -26,6 +26,8 @@ export default class Highscore extends Phaser.GameObjects.Container {
                     name,
                     score
                 } = result[i];
+                console.log(result[i]);
+                
                 const rank = this.rankText((i + 1).toString());
                 const name1 = this.nameText(name);
                 const scoreN = this.scoreText(score);
@@ -78,7 +80,7 @@ export default class Highscore extends Phaser.GameObjects.Container {
                 })
                 .then((result) => {
                     result.forEach((res) => {
-                        const name = res.name
+                        const name = res.address
                         const score = res.score
                         scoreArray.push({
                             name,
