@@ -22,10 +22,10 @@ export default class OverScene extends Phaser.Scene {
         this.score = data.score;
         this.high=localStorage.getItem('highscore')
         var player=localStorage.getItem('telegram')
-        // if (player && this.score!=0){
-        //     this.postScore(player,this.score)
+        if (player && this.score!=0){
+            this.postScore(player,this.score)
 
-        // }
+        }
         if (this.high){
             if (this.score>parseInt(this.high)){
                 localStorage.setItem('highscore',this.score.toString())
