@@ -13,7 +13,6 @@ function loadFont(name: string, url: string) {
   });
 }
 
-loadFont('rainy', 'assets/font/rainyhearts.ttf');
 loadFont('special', 'assets/font/specialagent.ttf');
 
 new Phaser.Game(

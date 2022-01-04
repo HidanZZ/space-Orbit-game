@@ -20,7 +20,6 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
 		this.rotation=rand
 		this.game.physics.velocityFromRotation( rand,400 ,
 			this.body.velocity)
-		console.log('rot',1*Phaser.Math.PI2/16);
 			
 		// this.setVelocityY(-500);
 	}

@@ -26,7 +26,6 @@ export default class Highscore extends Phaser.GameObjects.Container {
                     name,
                     score
                 } = result[i];
-                console.log(result[i]);
                 
                 const rank = this.rankText((i + 1).toString());
                 const name1 = this.nameText(name);

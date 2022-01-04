@@ -22,27 +22,10 @@ export default class Title extends Phaser.Scene {
 
 
     preload(): void {
-        for (var i = 0; i <= 9; i++) this.load.image(`score${i}`, `assets/sprite/${i}.png`);
-        this.load.image('background', 'assets/sprite/bg5.png');
-        this.load.image('base', 'assets/sprite/floorr.png');
-        this.load.image('continue', 'assets/sprite/continue.png');
-        this.load.image('instruction', 'assets/sprite/struct.png');
-        this.load.image('title', 'assets/sprite/Title.png');
-        this.load.image('leaderTitle', 'assets/sprite/leader.png');
-        this.load.image('sticker', 'assets/sprite/sticker.png');
-        this.load.image('pipe', 'assets/sprite/pipe-red.png');
-        this.load.image('scoreBoard', 'assets/sprite/scoreboard1.png');
-        this.load.image('bird1', 'assets/sprite/dog1.png');
-        this.load.image('bird2', 'assets/sprite/dog2.png');
-        this.load.image('bird3', 'assets/sprite/dog3.png');
-        this.load.image('bird4', 'assets/sprite/dog4.png');
-        this.load.image('play', 'assets/sprite/play.png');
+       
         this.load.image('ship', 'assets/atlas/ship.png');
         this.load.image('bg1', 'assets/atlas/bg.jpg');
         this.load.image('logo', 'assets/atlas/logo.jpg');
-        this.load.audio('fly', 'assets/audio/Wing.mp3');
-        this.load.audio('score', 'assets/audio/Point.mp3');
-        this.load.audio('hit', 'assets/audio/Hit.mp3');
         this.load.atlas('new', 'assets/atlas/atlas_0.png', 'assets/atlas/atlas_0.json')
         this.load.spritesheet('bullet', 'assets/atlas/bullet.png', {
             frameWidth: 64,
@@ -94,7 +77,6 @@ export default class Title extends Phaser.Scene {
             } else if (!input?.value.match(letterNumber)) {
                 this.showError('invalid telegram username')
             } else {
-                console.log("here")
                 // if (error) error.destroy()
                 localStorage.setItem('telegram', input.value.trim())
                 this.scene.start('GameScene');
@@ -111,7 +93,6 @@ export default class Title extends Phaser.Scene {
         //         } else if (!input?.value.match(letterNumber)) {
         //             this.showError('invalid telegram username')
         //         } else {
-        //             console.log("here")
         //             // if (error) error.destroy()
         //             localStorage.setItem('telegram', input.value.trim())
         //             this.scene.start('GameScene');

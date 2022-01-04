@@ -141,7 +141,6 @@ export default class GameScene extends Phaser.Scene {
 
                 }
               });
-              console.log(t.getChildren().length);
               
             if(t.getChildren().length==1){
                 this.cameras.main.once('camerafadeincomplete',  (camera) =>{
@@ -165,7 +164,6 @@ export default class GameScene extends Phaser.Scene {
         Phaser.Actions.PlaceOnCircle(t.getChildren(), this.circle);
 
             }
-            // console.log(t.getChildren());
             
         })
         const collider=this.physics.add.overlap(this.group,this.lasers,()=>{
@@ -212,11 +210,9 @@ export default class GameScene extends Phaser.Scene {
     createBullet() {
         if(this.isMoving){
             this.group?.getChildren().forEach(d=>{
-                console.log(d.angle);
                 
              this.lasers.fireLaser(this.center.x, this.center.y,d.rotation,this.turn);
            })
-           console.log('level',((this.level*20)>=400?400:(this.level*20)));
            
             this.spawn.reset({ delay: Phaser.Math.Between(500-((this.level*20)>=400?400:(this.level*20)),1000), callback: this.createBullet, callbackScope: this, repeat: 1});
         }
@@ -225,57 +221,5 @@ export default class GameScene extends Phaser.Scene {
 
     }
 
-    handleCollide(event: { pairs: { bodyA: MatterJS.BodyType, bodyB: MatterJS.BodyType }[] }) {
-        for (let pair of event.pairs) {
-            var catA = pair.bodyA.collisionFilter.category;
-            var catB = pair.bodyB.collisionFilter.category;
-            if ((catA == BIRD_BITMASK && catB == BASE_BITMASK) || (catA == BASE_BITMASK && catB == BIRD_BITMASK)) {
-                if (this.isMoving) {
-                    this.isMoving = false;
-                    this.isAlive = false;
-                    this.bird?.setAlive(false);
-                    this.sound.play('hit');
-                    for (let body of this.movers) {
-                        body.friction = 1;
-                        body.frictionAir = 1;
-                        body.frictionStatic = 1;
-                    }
-                    this.time.addEvent({
-                        delay: 500,
-                        callback: () => {
-                            if (!this.isMoving)
-                                this.cameras.main.fadeOut(500);
-                        },
-                        callbackScope: this
-                    })
-                    this.time.addEvent({
-                        delay: 1000,
-                        callback: () => {
-                            if (!this.isMoving)
-                                this.scene.start('OverScene', {score: this.score?.getScore()});
-                        },
-                        callbackScope: this
-                    })
-                }
-            } else if ((catA == DESTROY_BITMASK) || (catB == DESTROY_BITMASK)) {
-                if (catA == DESTROY_BITMASK) {
-                    this.movers.delete(pair.bodyB);
-                    pair.bodyB.gameObject?.destroy();
-                } else if (catB == DESTROY_BITMASK) {
-                    this.movers.delete(pair.bodyA);
-                    pair.bodyA.gameObject?.destroy();
-                }
-            } else if ((catA == BIRD_BITMASK && catB == POINT_BITMASK) || (catA == POINT_BITMASK && catB == BIRD_BITMASK)) {
-                if (catA == POINT_BITMASK) {
-                    this.movers.delete(pair.bodyA);
-                    this.matter.world.remove(pair.bodyA);
-                } else {
-                    this.movers.delete(pair.bodyB);
-                    this.matter.world.remove(pair.bodyB);
-                }
-                this.score?.setScore(this.score?.getScore() + 1);
-                this.sound.play('score');
-            }
-        }
-    }
+   
 }
