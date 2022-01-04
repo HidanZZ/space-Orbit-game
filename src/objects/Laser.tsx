@@ -15,7 +15,7 @@ export default class Laser extends Phaser.Physics.Arcade.Sprite {
 		this.setScale(1.5)
 		this.setActive(true);
 		this.setVisible(true);
-		const rand=rot+Phaser.Math.PI2/2+ (!turn? Phaser.Math.Between(-1000*Phaser.Math.PI2/10,0)/1000:Phaser.Math.Between(0,1000*Phaser.Math.PI2/10)/1000)
+		const rand=rot+Phaser.Math.PI2/2+ (!turn? Phaser.Math.Between(-1000*Phaser.Math.PI2/8,0)/1000:Phaser.Math.Between(0,1000*Phaser.Math.PI2/8)/1000)
 		// this.body.rotation = rand;
 		this.rotation=rand
 		this.game.physics.velocityFromRotation( rand,400 ,

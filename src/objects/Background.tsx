@@ -11,10 +11,10 @@ export default class Background
 		0,
 		0,
 		'bg1'
-	).setOrigin(0)
+	).setOrigin(0).setScale(0.7)
    }
    update(){
-	this.bg1.tilePositionX += 0.1
+	this.bg1.tilePositionX += 0.2
    }
 
 }

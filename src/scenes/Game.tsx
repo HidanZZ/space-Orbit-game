@@ -25,6 +25,7 @@ export default class GameScene extends Phaser.Scene {
     private bg: Background | null = null;
     private movers: Set<MatterJS.BodyType> = new Set();
     private center={};
+    private level=0;
     private turn=false;
     constructor() {
         super('GameScene');
@@ -62,8 +63,8 @@ export default class GameScene extends Phaser.Scene {
         let overlay=this.add.rectangle(0, 0, config.scale.width, config.scale.height,0x000000).setDepth(5).setOrigin(0).setAlpha(0.5);
         
 
-        this.cannonBg=this.add.image(this.center.x, this.center.y,'new','theme_6/cannon/cannonBg').setOrigin(0.5, 0.5).setScale(2)
-        this.add.image(this.center.x, this.center.y,'new','theme_6/cannon/cannon_0').setOrigin(0.5, 0.5)
+        this.cannonBg=this.add.image(this.center.x, this.center.y,'new','theme_4/cannon/cannonBg').setOrigin(0.5, 0.5).setScale(2)
+        this.add.image(this.center.x, this.center.y,'new','theme_4/cannon/cannon_0').setOrigin(0.5, 0.5)
         this.isAlive = true;
         this.isMoving = false;
         var score = -1;
@@ -95,7 +96,7 @@ export default class GameScene extends Phaser.Scene {
 
         // Create pipes per time
         this.spawn=this.time.addEvent({
-            delay: Phaser.Math.Between(500,1000),
+            delay: Phaser.Math.Between(500-((this.level*20)<=400?400:(this.level*20)),1000),
             callback: this.createBullet,
             repeat: -1,
             callbackScope: this
@@ -146,13 +147,14 @@ export default class GameScene extends Phaser.Scene {
                 this.cameras.main.once('camerafadeincomplete',  (camera) =>{
                    this.isMoving = true;
                     this.spawn=this.time.addEvent({
-                        delay: Phaser.Math.Between(500,1000),
+                        delay: Phaser.Math.Between(500-((this.level*20)<=400?400:(this.level*20)),1000),
                         callback: this.createBullet,
                         repeat: -1,
                         callbackScope: this
                     })
 
                 });
+                this.level++;
                 this.isMoving= false;
                 this.lasers.getChildren().forEach((child) =>{
                     child.body.reset(-100,-100)
@@ -169,9 +171,9 @@ export default class GameScene extends Phaser.Scene {
         const collider=this.physics.add.overlap(this.group,this.lasers,()=>{
            this.isAlive = false
            this.isMoving = false;
-            collider.active=false
-            collectCollider.active=false
-           this.tweens.add({
+          collider.destroy()
+         collectCollider.active=false
+        this.tweens.add({
             targets     : this.group.getChildren() ,
             scale       : 10,
             alpha:0,
@@ -214,7 +216,9 @@ export default class GameScene extends Phaser.Scene {
                 
              this.lasers.fireLaser(this.center.x, this.center.y,d.rotation,this.turn);
            })
-            this.spawn.reset({ delay: Phaser.Math.Between(500,1000), callback: this.createBullet, callbackScope: this, repeat: 1});
+           console.log('level',((this.level*20)>=400?400:(this.level*20)));
+           
+            this.spawn.reset({ delay: Phaser.Math.Between(500-((this.level*20)>=400?400:(this.level*20)),1000), callback: this.createBullet, callbackScope: this, repeat: 1});
         }
         
 

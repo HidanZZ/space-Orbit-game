@@ -37,8 +37,8 @@ export default class Title extends Phaser.Scene {
         this.load.image('bird3', 'assets/sprite/dog3.png');
         this.load.image('bird4', 'assets/sprite/dog4.png');
         this.load.image('play', 'assets/sprite/play.png');
-        this.load.image('ship', 'assets/atlas/Beholder.png');
-        this.load.image('bg1', 'assets/atlas/stars.png');
+        this.load.image('ship', 'assets/atlas/ship.png');
+        this.load.image('bg1', 'assets/atlas/bg.jpg');
         this.load.image('logo', 'assets/atlas/logo.jpg');
         this.load.audio('fly', 'assets/audio/Wing.mp3');
         this.load.audio('score', 'assets/audio/Point.mp3');
