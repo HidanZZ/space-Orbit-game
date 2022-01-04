@@ -26,6 +26,7 @@ export default class GameScene extends Phaser.Scene {
     private movers: Set<MatterJS.BodyType> = new Set();
     private center={};
     private level=0;
+    private angularVelocity=0.015;
     private turn=false;
     constructor() {
         super('GameScene');
@@ -41,6 +42,7 @@ export default class GameScene extends Phaser.Scene {
             y:this.scale.height/2,
             radius:this.scale.width/2-50
         };
+        this.angularVelocity=0.015
         // Set fade in
         this.cameras.main.fadeIn(500);
         this.bg=new Background(this.add)
@@ -194,11 +196,11 @@ export default class GameScene extends Phaser.Scene {
         if(this.isAlive){
             if(this.isMoving){
                 this.group?.getChildren().forEach(d=>{
-                    d.rotation=d.rotation+(this.turn?0.015:-0.015)
-                    this.cannonBg.rotation+=(this.turn?0.015:-0.015)
+                    d.rotation=d.rotation+(this.turn?this.angularVelocity:-this.angularVelocity)
+                    this.cannonBg.rotation+=(this.turn?this.angularVelocity:-this.angularVelocity)
                   })
                   
-                    Phaser.Actions.RotateAroundDistance(this.group?.getChildren(), { x: this.center.x, y: this.center.y }, this.turn?0.015:-0.015, this.circle?.radius);
+                    Phaser.Actions.RotateAroundDistance(this.group?.getChildren(), { x: this.center.x, y: this.center.y }, this.turn?this.angularVelocity:-this.angularVelocity, this.circle?.radius);
             }
         }
         
