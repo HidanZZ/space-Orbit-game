@@ -193,6 +193,8 @@ export default class GameScene extends Phaser.Scene {
 
     update(time: number, delta: number): void {
         this.bg?.update()
+        console.log(this.angularVelocity);
+        
         if(this.isAlive){
             if(this.isMoving){
                 this.group?.getChildren().forEach(d=>{
