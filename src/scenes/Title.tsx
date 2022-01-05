@@ -36,7 +36,7 @@ export default class Title extends Phaser.Scene {
 
     create(): void {
         // this.disabled = false;
-
+        
         // Set fade in
         this.highVisible=false;
         
@@ -50,7 +50,20 @@ export default class Title extends Phaser.Scene {
 
         // Add base
         // this.floor=this.add.tileSprite(0,config.scale.height,800,112,'base')
-        const element = this.add.dom(config.scale.width / 2, config.scale.height - 350).createFromHTML('<input class="playerInput" type="text" placeholder="Your Username" name="player">', 'form').setDepth(4);
+        if (navigator.userAgent.indexOf("Firefox") > 0) {
+            this.add.image(config.scale.width / 2, config.scale.height*2 /3, 'new', 'battle/themePanel_1').setScale(3,1.3).setDepth(4)
+             this.add.text(config.scale.width / 2, config.scale.height*2 /3-40, 'We\'re sorry !', {
+                fontFamily: 'special',
+                fontSize: '50px',
+                color: '#FFFFFF',
+            }).setDepth(4).setOrigin(0.5)
+            this.add.text(config.scale.width / 2, config.scale.height*2 /3+30, 'This browser isn\'t supported yet !', {
+                fontFamily: 'special',
+                fontSize: '40px',
+                color: '#FFFFFF',
+            }).setDepth(4).setOrigin(0.5)
+        }else{
+            const element = this.add.dom(config.scale.width / 2, config.scale.height - 350).createFromHTML('<input class="playerInput" type="text" placeholder="Your Username" name="player">', 'form').setDepth(4);
         const input = document.querySelector('input');
         if (localStorage.getItem('telegram')) {
             input.value = localStorage.getItem('telegram');
@@ -84,25 +97,9 @@ export default class Title extends Phaser.Scene {
             }
         })
 
-        // this.playBtn = this.add.image(config.scale.width / 2, config.scale.height  - 125, 'play').setInteractive({ useHandCursor: true }).setDepth(99).setOrigin(0.5, 0.5)
-        //     .on('pointerdown', () => {
-        //         var letterNumber = /.*\B@(?=\w{5,64}\b)[a-zA-Z0-9]+(?:_[a-zA-Z0-9]+)*.*/;
-
-        //         if (input?.value.trim() === "") {
-        //             this.showError('username cannot be empty')
-        //         } else if (!input?.value.match(letterNumber)) {
-        //             this.showError('invalid telegram username')
-        //         } else {
-        //             // if (error) error.destroy()
-        //             localStorage.setItem('telegram', input.value.trim())
-        //             this.scene.start('GameScene');
-        //             // game.state.start("Leaderboard")
-        //         }
-        //     })
-
-        this.time.delayedCall(1000, () => {
-            
-        });
+        }
+        
+      
     }
     // var error = undefined
 

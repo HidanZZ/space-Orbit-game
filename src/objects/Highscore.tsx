@@ -3,7 +3,7 @@ import config from '../config';
 
 export default class Highscore extends Phaser.GameObjects.Container {
     // private url: string = '';
-    private url = `https://api-houssein.herokuapp.com/user/`;
+    private url = `https://highscores-api.herokuapp.com/user/`;
     private bg :Phaser.GameObjects.Image
 
     constructor(scene: Phaser.Scene, x: number, y: number) {
@@ -79,7 +79,7 @@ export default class Highscore extends Phaser.GameObjects.Container {
                 })
                 .then((result) => {
                     result.forEach((res) => {
-                        const name = res.address
+                        const name = res.name
                         const score = res.score
                         scoreArray.push({
                             name,

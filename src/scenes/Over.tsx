@@ -12,7 +12,7 @@ export default class OverScene extends Phaser.Scene {
     private scoreDis: Score | null = null;
     private highscoreDis: Score | null = null;
     private high: string | null = null;
-    private url = `https://api-houssein.herokuapp.com/user/`;
+    private url = `https://highscores-api.herokuapp.com/user/`;
 
     constructor() {
         super('OverScene');

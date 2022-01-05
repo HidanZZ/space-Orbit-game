@@ -168,9 +168,11 @@ export default class GameScene extends Phaser.Scene {
             }
             
         })
-        const collider=this.physics.add.overlap(this.group,this.lasers,()=>{
+        const collider=this.physics.add.overlap(this.group,this.lasers,(object1,object2) =>{
            this.isAlive = false
            this.isMoving = false;
+          collider.active=false
+          object1.body.setSize(1,1)
           collider.destroy()
          collectCollider.active=false
         this.tweens.add({
